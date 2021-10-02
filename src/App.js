@@ -24,7 +24,7 @@ function App(props) {
   ///////////////
 
   // Our Api Url
-  const url = "https://api.herokuapp.com/todos/";
+  const url = "http://localhost:8000/todos/";
 
   // State to Hold The List of Posts
   const [posts, setPosts] = useState([]);
@@ -32,10 +32,22 @@ function App(props) {
   //////////////
   // Functions
   //////////////
+  const getTodos = async () => {
+      try{
+          const response = await fetch(url);
+          const data = await response.json();
+          setPosts(data);
+      }catch(e) {
+          console.error(e);
+      }
+  }
 
   //////////////
   // useEffects
   //////////////
+  useEffect(() => {
+      getTodos();
+  }, []);
 
   /////////////////////
   // returned JSX

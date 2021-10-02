@@ -5,7 +5,7 @@ import App from "./App";
 import "milligram";
 // Import the BrowserRouter Component and Rename it Router
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
+
 
 ReactDOM.render(
   // Wrap our App Component inside router so App and children can use router
