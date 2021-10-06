@@ -29,6 +29,11 @@ function App(props) {
   // State to Hold The List of Posts
   const [posts, setPosts] = useState([]);
 
+  const nullTudo = {
+    subject: '',
+    details: ''
+  }
+
   //////////////
   // Functions
   //////////////
@@ -39,6 +44,22 @@ function App(props) {
           setPosts(data);
       }catch(e) {
           console.error(e);
+      }
+  }
+
+  const addTodos = async newTodo => {
+      try {
+        const response = await fetch(url, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newTodo)
+        }).then(_ => {
+            return getTodos();
+        })
+      } catch(error){
+        console.error(error);
       }
   }
 
