@@ -92,6 +92,18 @@ function App(props) {
       getTodos();
   }
 
+  const deleteTodo = async todo => {
+    try {
+        const response = await fetch(url + todo.id + "/", {
+          method: "delete",
+        }).then(data => getTodos())
+    }catch(e) {
+        console.error(e)
+    }finally{
+        window.location.assign('/')
+    }
+  }
+
   //////////////
   // useEffects
   //////////////
@@ -115,7 +127,12 @@ function App(props) {
         <Route
           path="/post/:id"
           render={(routerProps) => (
-            <SinglePost {...routerProps} posts={posts} edit={getTargetTodo}/>
+            <SinglePost 
+                {...routerProps} 
+                posts={posts} 
+                edit={getTargetTodo}
+                deleteTodo={deleteTodo}
+            />
           )}
         />
         <Route
