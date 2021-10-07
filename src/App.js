@@ -89,6 +89,7 @@ function App(props) {
       }catch(e) {
         console.error(e);
       }
+      getTodos();
   }
 
   //////////////
@@ -114,7 +115,7 @@ function App(props) {
         <Route
           path="/post/:id"
           render={(routerProps) => (
-            <SinglePost {...routerProps} posts={posts} />
+            <SinglePost {...routerProps} posts={posts} edit={getTargetTodo}/>
           )}
         />
         <Route
