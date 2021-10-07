@@ -29,11 +29,12 @@ function App(props) {
   // State to Hold The List of Posts
   const [posts, setPosts] = useState([]);
 
-  const nullTudo = {
+  const nullTodo = {
     subject: '',
     details: ''
   }
 
+  const [targetTodo, setTargetTodo] = useState(nullTodo)
   //////////////
   // Functions
   //////////////
@@ -60,6 +61,27 @@ function App(props) {
         })
       } catch(error){
         console.error(error);
+      }
+  }
+
+  
+
+  const getTargetTodo = todo => {
+    setTargetTodo(todo);
+    props.history.push('/edit');
+  }
+
+  const updateTodo = async todo => {
+      try {
+        const response = await fetch(url + todo.id + '/', {
+            method: "put",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(todo)
+        })
+      }catch(e) {
+        console.error(e);
       }
   }
 
@@ -90,11 +112,23 @@ function App(props) {
         />
         <Route
           path="/new"
-          render={(routerProps) => <Form {...routerProps} />}
+          render={(routerProps) => (
+            <Form {...routerProps} 
+            initialTodo={nullTodo}
+            handleSubmit={addTodos}
+            buttonLabel="Create Todo" 
+            />
+            )}
         />
         <Route
           path="/edit"
-          render={(routerProps) => <Form {...routerProps} />}
+          render={(routerProps) => (
+            <Form {...routerProps} 
+            initialTodo={targetTodo}
+            handleSubmit={updateTodo}
+            buttonLabel="Update Todo" 
+            />
+            )}
         />
       </Switch>
     </div>
