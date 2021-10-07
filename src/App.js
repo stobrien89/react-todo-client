@@ -7,7 +7,7 @@ import Form from "./pages/Form";
 import React, { useState, useEffect } from "react";
 
 // Import components from React Router
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 function App(props) {
   ////////////////////
@@ -17,6 +17,12 @@ function App(props) {
   const h1 = {
     textAlign: "center",
     margin: "10px",
+  };
+
+  const button = {
+    backgroundColor: "navy",
+    display: "block",
+    margin: "auto",
   };
 
   ///////////////
@@ -98,6 +104,7 @@ function App(props) {
   return (
     <div>
       <h1 style={h1}>My Todo List</h1>
+      <Link to="/new"><button style={button}>Create New Todo</button></Link>
       <Switch>
         <Route
           exact
